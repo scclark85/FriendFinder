@@ -13,8 +13,8 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
 // application routs (cannot get these to work)
-require("../routing/apiRoutes.js")(app);
-require("../routing/htmlRoutes.js")(app);
+require("./app/routing/apiRoutes.js")(app);
+require("./app/routing/htmlRoutes.js")(app);
 
 // The below code effectively "starts" our server
 app.listen(PORT, function() {

@@ -204,7 +204,34 @@
 
         <hr>
 
-    </div>
+        <div>
+            <p>
+                <a href="/api/friends">API Friends List</a>
+                |
+                <a href="https://github.com/scclark85/FriendFinder.git">Git Hub Repo</a>
+            </p>
+        </div>
+
+        <!-- Modal after survey completion -->
+        <div id="bff" class="modal" tabindex="-1" role="dialog">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Meet your new friend!</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <h2 id="newfriend"></h2>
+                        <img id="bffimage" src="#">
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
 
 </body>
 
@@ -218,27 +245,36 @@
             friendName: $("#nameInput").val().trim(),
             friendPic: $("#photoInput").val().trim(),
             Score: [
-                $("#q1").val().trim(),
-                $("#q2").val().trim(),
-                $("#q3").val().trim(),
-                $("#q4").val().trim(),
-                $("#q5").val().trim(),
-                $("#q6").val().trim(),
-                $("#q7").val().trim(),
-                $("#q8").val().trim(),
-                $("#q9").val().trim(),
-                $("#q10").val().trim()
+                $("#q1").val(),
+                $("#q2").val(),
+                $("#q3").val(),
+                $("#q4").val(),
+                $("#q5").val(),
+                $("#q6").val(),
+                $("#q7").val(),
+                $("#q8").val(),
+                $("#q9").val(),
+                $("#q10").val()
             ]
         };
-        console.log(newFriend + JSON.stringify(newFriend));
+        console.log(newFriend);
+        // if arr.includes("") => alert("did not complete survey") and not let the post request go through
+        if (newFriend.Score.includes("Select an option")) {
+            alert("Survey incomplete.")
+        } else {
 
-        $.post("api/friends", newFriend).then(function (data) {
-            console.log("survey.html", data);
+            $.post("api/friends", newFriend).then(function (data) {
+                console.log("survey.html", data);
 
-            // would add in here the similar input to newFriend answers
+                $("#newfriend").text(data.friendName);
+                $("#bffimage").attr("src", data.friendPic);
+            });
+            // shows modal
+            $("bff").modal();
+
+        }
 
 
-        });
 
     });
 
