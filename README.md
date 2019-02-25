@@ -6,4 +6,4 @@
 The *Friend Finder* application uses node.js and express server on the backend and uses bootstrap for the front end. 
 
 **Demo**
-Friend finder is deployed to Heroku.  Please check it out https://morning-island-37665.herokuapp.com/ 
+Friend finder is deployed to Heroku.  Please check it out [here]. https://morning-island-37665.herokuapp.com/ 
